@@ -1,0 +1,27 @@
+specfile_path: python-debugpy.spec
+
+# Upstream project configuration
+upstream_project_url: https://github.com/microsoft/debugpy
+upstream_package_name: debugpy
+downstream_package_name: python-debugpy
+
+jobs:
+  - job: copr_build
+    trigger: commit
+    branch: main
+    targets:
+      - epel-10
+      - epel-9
+      - fedora-44
+      - fedora-eln
+      - fedora-rawhide
+    owner: "@rhinstaller"
+    project: devutils
+    preserve_project: true
+
+files_to_sync:
+  - .packit.yaml
+  - python-debugpy.spec
+
+# Merge changes automatically if tests pass (optional)
+merge_pr_in_ci: false

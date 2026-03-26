@@ -1,0 +1,86 @@
+name: Validate RPM Spec
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    container:
+      image: fedora:43
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          dnf install -y rpm-build rpmdevtools rpmlint spectool \
+                         python3-devel python3-setuptools python3-wheel \
+                         gcc gcc-c++ python3-Cython
+
+      - name: Validate spec file
+        run: |
+          rpmlint python-debugpy.spec || true
+
+      - name: Download sources
+        run: |
+          spectool -g python-debugpy.spec
+
+      - name: Build SRPM
+        run: |
+          rpmbuild -bs python-debugpy.spec \
+            --define "_sourcedir $PWD" \
+            --define "_srcrpmdir $PWD"
+
+      - name: Upload SRPM
+        uses: actions/upload-artifact@v4
+        with:
+          name: srpm
+          path: "*.src.rpm"
+          retention-days: 30
+
+  build-fedora:
+    needs: validate
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        fedora: [43, 44, rawhide]
+    container:
+      image: fedora:${{ matrix.fedora }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          dnf install -y rpm-build rpmdevtools spectool \
+                         python3-devel python3-setuptools python3-wheel \
+                         gcc gcc-c++ python3-Cython
+
+      - name: Download sources
+        run: |
+          spectool -g python-debugpy.spec
+
+      - name: Build RPM
+        run: |
+          rpmbuild -ba python-debugpy.spec \
+            --define "_sourcedir $PWD" \
+            --define "_rpmdir $PWD/RPMS" \
+            --define "_srcrpmdir $PWD/SRPMS" \
+            --define "_builddir $PWD/BUILD" \
+            --define "_buildrootdir $PWD/BUILDROOT"
+
+      - name: Upload RPMs
+        uses: actions/upload-artifact@v4
+        with:
+          name: rpms-fedora-${{ matrix.fedora }}
+          path: |
+            RPMS/**/*.rpm
+            SRPMS/*.src.rpm
+          retention-days: 30
