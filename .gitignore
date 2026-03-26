@@ -1,0 +1,25 @@
+# RPM build artifacts
+*.rpm
+*.src.rpm
+*.tar.gz
+*.log
+
+# Build directories
+BUILD/
+BUILDROOT/
+RPMS/
+SOURCES/
+SPECS/
+SRPMS/
+*-build/
+
+# Mock build results
+results_*/
+
+# Editor files
+*~
+*.swp
+*.swo
+.*.sw?
+.vscode/
+.idea/
