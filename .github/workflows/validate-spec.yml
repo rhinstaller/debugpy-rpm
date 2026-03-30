@@ -19,9 +19,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dnf install -y rpm-build rpmdevtools rpmlint spectool \
-                         python3-devel python3-setuptools python3-wheel \
-                         gcc gcc-c++ python3-Cython
+          dnf install -y rpm-build rpmdevtools rpmlint spectool
+          dnf builddep -y python-debugpy.spec
 
       - name: Validate spec file
         run: |
@@ -59,9 +58,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dnf install -y rpm-build rpmdevtools spectool \
-                         python3-devel python3-setuptools python3-wheel \
-                         gcc gcc-c++ python3-Cython
+          dnf install -y rpm-build rpmdevtools spectool
+          dnf builddep -y python-debugpy.spec
 
       - name: Download sources
         run: |
