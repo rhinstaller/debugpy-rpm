@@ -21,11 +21,11 @@ if [ "$CURRENT_VERSION" = "$LATEST_VERSION" ]; then
 else
     echo "⚠ New version available: $LATEST_VERSION"
     echo ""
-    echo "To update:"
-    echo "1. Edit $SPEC_FILE and update version to $LATEST_VERSION"
+    echo "To update manually:"
+    echo "1. Edit $SPEC_FILE and update %global pypi_version to $LATEST_VERSION"
     echo "2. Add changelog entry"
-    echo "3. Run: make srpm"
+    echo "3. Commit and push changes"
     echo ""
-    echo "Or let Packit handle it automatically!"
+    echo "Or wait for the weekly GitHub Action to create a PR automatically."
     exit 1
 fi
