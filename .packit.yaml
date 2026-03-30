@@ -19,6 +19,15 @@ jobs:
     project: devutils
     preserve_project: true
 
+# Download source from PyPI and output the archive filename
+actions:
+  create-archive:
+    - bash -c "spectool -g -C . python-debugpy.spec >/dev/null && ls debugpy-*.tar.gz"
+
+# Dependencies needed for downloading sources
+srpm_build_deps:
+  - rpmdevtools
+
 files_to_sync:
   - .packit.yaml
   - python-debugpy.spec
