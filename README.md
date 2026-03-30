@@ -98,3 +98,4 @@ Compares spec file version with latest PyPI release. Requires `jq`.
 ## License
 
 Spec file is provided as-is. debugpy is licensed under MIT.
+
