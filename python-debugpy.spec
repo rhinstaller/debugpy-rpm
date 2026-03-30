@@ -14,7 +14,9 @@ BuildRequires:  python3-devel
 BuildRequires:  pyproject-rpm-macros
 BuildRequires:  python3-pip
 BuildRequires:  python3-setuptools
+%if 0%{?rhel} && 0%{?rhel} < 11
 BuildRequires:  python3-wheel
+%endif
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
 
