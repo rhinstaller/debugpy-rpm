@@ -1,8 +1,7 @@
 # debugpy RPM Package
 
-RPM packaging for debugpy (Debug Adapter Protocol for Python 3) compatible with Fedora, CentOS Stream, and EPEL.
+RPM packaging for debugpy (Debug Adapter Protocol for Python 3) compatible with Fedora and RHEL/EPEL.
 
-- **Version**: 1.8.20
 - **License**: MIT
 - **Upstream**: https://github.com/microsoft/debugpy
 
@@ -10,7 +9,7 @@ RPM packaging for debugpy (Debug Adapter Protocol for Python 3) compatible with 
 
 ### Automated Builds (Recommended)
 
-Packit automatically monitors upstream releases and builds in COPR. See **[SETUP.md](SETUP.md)** for complete setup instructions.
+Packit automatically monitors upstream releases and builds in COPR.
 
 ### Manual Local Build
 
@@ -19,7 +18,7 @@ Packit automatically monitors upstream releases and builds in COPR. See **[SETUP
 make mock
 
 # Build for specific distribution
-make mock DIST=fedora-43-x86_64
+make mock DIST=fedora-44-x86_64
 make mock DIST=epel-9-x86_64
 ```
 
@@ -37,9 +36,9 @@ newgrp mock
 
 # Build for different distributions
 make mock DIST=fedora-rawhide-x86_64  # Default
-make mock DIST=fedora-43-x86_64
-make mock DIST=centos-stream-9-x86_64
+make mock DIST=fedora-44-x86_64
 make mock DIST=epel-9-x86_64
+make mock DIST=epel-10-x86_64
 ```
 
 ## Manual rpmbuild
@@ -59,10 +58,8 @@ make rpm
 
 Once configured, Packit automatically:
 - Monitors https://github.com/microsoft/debugpy for new releases
-- Builds RPMs in COPR for Fedora 43+, CentOS Stream, and EPEL
+- Builds RPMs in COPR for Fedora and EPEL (RHEL)
 - Proposes updates to official Fedora repositories
-
-**Setup**: See [SETUP.md](SETUP.md) for detailed Packit configuration.
 
 **Test locally**:
 ```bash
@@ -95,9 +92,8 @@ Compares spec file version with latest PyPI release. Requires `jq`.
 
 ## Supported Distributions
 
-- Fedora 43+
-- CentOS Stream 9+
-- EPEL 9, 10 (for RHEL 9+)
+- Fedora 44, ELN, Rawhide
+- RHEL 9, 10 (via EPEL)
 
 ## License
 
