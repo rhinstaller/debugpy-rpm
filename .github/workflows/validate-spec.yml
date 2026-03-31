@@ -35,10 +35,3 @@ jobs:
           rpmbuild -bs python-debugpy.spec \
             --define "_sourcedir $PWD" \
             --define "_srcrpmdir $PWD"
-
-      - name: Upload SRPM
-        uses: actions/upload-artifact@v4
-        with:
-          name: srpm
-          path: "*.src.rpm"
-          retention-days: 30
