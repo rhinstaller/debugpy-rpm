@@ -13,6 +13,9 @@ permissions:
 jobs:
   check-update:
     runs-on: ubuntu-latest
+    container:
+      image: fedora:rawhide
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
