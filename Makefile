@@ -1,7 +1,7 @@
 .PHONY: help srpm rpm mock clean spectool
 
-SPEC_FILE = python-debugpy.spec
-PACKAGE_NAME = python-debugpy
+SPEC_FILE = python3-debugpy.spec
+PACKAGE_NAME = python3-debugpy
 DIST ?= fedora-rawhide-x86_64
 
 help:
@@ -22,7 +22,7 @@ help:
 	@echo "  make mock DIST=epel-10-x86_64"
 
 spectool:
-	spectool -g -R $(SPEC_FILE)
+	spectool -g -C . $(SPEC_FILE)
 
 srpm: spectool
 	rm -f *.src.rpm

@@ -1,7 +1,7 @@
 %global pypi_name debugpy
 %global pypi_version 1.8.20
 
-Name:           python-%{pypi_name}
+Name:           python3-%{pypi_name}
 Version:        %{pypi_version}
 Release:        1%{?dist}
 Summary:        An implementation of the Debug Adapter Protocol for Python
@@ -23,16 +23,9 @@ BuildRequires:  gcc-c++
 # For building Cython extensions
 BuildRequires:  python3-cython
 
-%description
-debugpy is an implementation of the Debug Adapter Protocol for Python 3.
-It enables debugging Python applications through a standardized protocol,
-allowing various IDEs and editors to connect and control execution.
-
-%package -n python3-%{pypi_name}
-Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
-%description -n python3-%{pypi_name}
+%description
 debugpy is an implementation of the Debug Adapter Protocol for Python 3.
 It enables debugging Python applications through a standardized protocol,
 allowing various IDEs and editors to connect and control execution.
@@ -47,7 +40,7 @@ allowing various IDEs and editors to connect and control execution.
 %pyproject_install
 %pyproject_save_files %{pypi_name}
 
-%files -n python3-%{pypi_name} -f %{pyproject_files}
+%files -f %{pyproject_files}
 %doc README.md
 %{_bindir}/debugpy
 %{_bindir}/debugpy-adapter
