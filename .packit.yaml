@@ -1,9 +1,9 @@
-specfile_path: python-debugpy.spec
+specfile_path: python3-debugpy.spec
 
 # Upstream project configuration
 upstream_project_url: https://github.com/microsoft/debugpy
 upstream_package_name: debugpy
-downstream_package_name: python-debugpy
+downstream_package_name: python3-debugpy
 
 jobs:
   # Build on commits to main
@@ -35,7 +35,7 @@ jobs:
 # Download source from PyPI and output the archive filename
 actions:
   create-archive:
-    - bash -c "spectool -g -C . python-debugpy.spec >/dev/null && ls debugpy-*.tar.gz"
+    - bash -c "spectool -g -C . python3-debugpy.spec >/dev/null && ls debugpy-*.tar.gz"
 
 # Dependencies needed for downloading sources
 srpm_build_deps:
@@ -43,7 +43,7 @@ srpm_build_deps:
 
 files_to_sync:
   - .packit.yaml
-  - python-debugpy.spec
+  - python3-debugpy.spec
 
 # Merge changes automatically if tests pass (optional)
 merge_pr_in_ci: false

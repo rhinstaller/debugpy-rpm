@@ -20,18 +20,18 @@ jobs:
       - name: Install dependencies
         run: |
           dnf install -y rpm-build rpmdevtools rpmlint spectool
-          dnf builddep -y python-debugpy.spec
+          dnf builddep -y python3-debugpy.spec
 
       - name: Validate spec file
         run: |
-          rpmlint python-debugpy.spec || true
+          rpmlint python3-debugpy.spec || true
 
       - name: Download sources
         run: |
-          spectool -g python-debugpy.spec
+          spectool -g python3-debugpy.spec
 
       - name: Build SRPM
         run: |
-          rpmbuild -bs python-debugpy.spec \
+          rpmbuild -bs python3-debugpy.spec \
             --define "_sourcedir $PWD" \
             --define "_srcrpmdir $PWD"
